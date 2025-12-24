@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta tag essencial para responsividade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Segundo Natal Juntos ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Pinyon Script (para títulos) e Montserrat (para corpo) -->
+    <link href="fonts.googleapis.com" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Fundo Animado -->
+    <div class="background-animation" id="background-animation"></div>
+
+    <main class="container">
+        <!-- SEÇÃO DO CRONÔMETRO -->
+        <section id="countdown-section" class="section countdown-top-adjusted">
+            <p class="subtitle">Contagem regressiva para o nosso Natal juntos ❤️</p>
+            <div class="countdown-timer" id="countdown"></div>
+        </section>
+
+        <!-- SEÇÃO DO VÍDEO -->
+        <section id="video-section" class="section">
+            <div class="video-container-wrapper">
+                <div class="video-placeholder">
+                    <p id="video-placeholder-text">Espere o momento especial ❤️</p>
+                    <video id="romantic-video" src="video presentre.mp4" loop muted playsinline style="display: none;"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEÚDO ROMÂNTICO -->
+        <!-- Adicionada classe 'hidden' que será removida via JS -->
+        <section id="romantic-content" class="section hidden">
+            <h1 class="main-message" id="typing-text"></h1>
+            
+            <!-- Linha do tempo -->
+             <div class="timeline-container">
+                <h2 class="timeline-title">Um Amor Que Floresceu e Brilha Neste Natal</h2>
+                <div class="timeline-item revealable">
+                    <span class="date">📅 03/11/2024</span>
+                    <span class="event">Nosso relacionamento começou</span>
+                </div>
+                <div class="timeline-item revealable">
+                    <span class="date">🏠 15/12/2024</span>
+                    <span class="event">Começamos a morar juntos</span>
+                </div>
+                <div class="timeline-item revealable">
+                    <span class="date">🎄 25/12/2024</span>
+                    <!-- Data atualizada para o próximo natal -->
+                    <span class="event">Nosso segundo Natal juntos!</span>
+                </div>
+            </div>
+
+            <!-- CONTROLES DE CONTEÚDO DINÂMICO (5 Botões no final) -->
+            <div class="tab-buttons">
+                <button class="tab-button" onclick="openTab(event, 'mensagem1')">Mensagem 1</button>
+                <button class="tab-button" onclick="openTab(event, 'mensagem2')">Mensagem 2</button>
+                <button class="tab-button" onclick="openTab(event, 'mensagem3')">Mensagem 3</button>
+                <button class="tab-button" onclick="openTab(event, 'mensagem4')">Mensagem 4</button>
+                <button class="tab-button" onclick="openTab(event, 'mensagem5')">Mensagem 5</button>
+            </div>
+
+            <!-- ÁREA DE CONTEÚDO DINÂMICO -->
+            <div id="content-container" class="content-container">
+                <div id="mensagem1" class="tab-content">
+                    <h3>🎁 Escolha Eterna</h3>
+                    <p>Kerolyn, desde o dia em que você entrou na minha vida, tudo ganhou mais sentido. Neste Natal, celebro não apenas uma data, mas a certeza de que escolhi você para caminhar comigo.</p>
+                </div>
+                <div id="mensagem2" class="tab-content">
+                    <h3>💖 Nosso Começo</h3>
+                    <p>O nosso amor começou em 03/11/2024, virou lar em 15/12/2024 e hoje se transforma em lembrança eterna. Meu Natal é você.</p>
+                </div>
+                <div id="mensagem3" class="tab-content">
+                    <h3>🎄 Maior Presente</h3>
+                    <p>Entre todos os presentes que a vida poderia me dar, você foi o mais precioso. Que este seja apenas o primeiro de muitos Natais lado a lado.</p>
+                </div>
+                <div id="mensagem4" class="tab-content">
+                    <h3>✨ Natal Nosso</h3>
+                    <p>O amor não mora em datas, mas algumas datas se tornam eternas por causa do amor. Este Natal é nosso, Kerolyn.</p>
+                </div>
+                <div id="mensagem5" class="tab-content">
+                    <h3>🌟 Meu Lar</h3>
+                    <p>Com você, cada dia é casa, cada sorriso é abrigo e cada Natal é promessa de um para sempre.</p>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

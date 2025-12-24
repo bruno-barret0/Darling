@@ -1,0 +1,173 @@
+/* RESET E ESTILOS GERAIS */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+body {
+    background-color: #4e0000; color: #FFB6C1; font-family: 'Montserrat', sans-serif;
+    min-height: 100vh; overflow-x: hidden; position: relative; text-align: center;
+}
+.container {
+    position: relative; z-index: 10; padding: 20px; width: 100%; max-width: 800px; margin: auto;
+}
+.section { margin-bottom: 40px; width: 100%; }
+.countdown-top-adjusted { margin-top: 20px; }
+/* Responsividade: Define a transição para a remoção da classe 'hidden' */
+.hidden { display: block; opacity: 0; transition: opacity 1s ease-in-out; pointer-events: none; height: 0; overflow: hidden; }
+
+/* TIPOGRAFIA */
+.subtitle { font-size: 1.2rem; margin-bottom: 20px; font-weight: 300; }
+.main-message {
+    font-family: 'Pinyon Script', cursive; font-size: 3rem; color: #ffffff;
+    margin-bottom: 30px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* CRONÔMETRO */
+.countdown-timer { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    flex-wrap: wrap; /* Adicionado para responsividade */
+}
+.countdown-timer div {
+    background: rgba(255, 255, 255, 0.1); padding: 15px 20px; border-radius: 10px;
+    backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    min-width: 100px; /* Adicionado para responsividade */
+}
+.countdown-timer span { font-size: 2.5rem; font-weight: 700; color: #FFB6C1; text-shadow: 0 0 5px #ff0000; }
+.countdown-timer small { font-size: 0.8rem; color: #ffffff; text-transform: uppercase; }
+
+/* VIDEO CONTAINER RETANGULAR */
+.video-container-wrapper { display: flex; justify-content: center; margin-top: 30px; width: 100%; }
+.video-placeholder {
+    position: relative; width: 100%; padding-top: 56.25%; /* Proporção 16:9 */
+    background-color: #8B0000; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+    border-radius: 8px;
+    max-width: 700px; /* Adicionado para responsividade */
+}
+#video-placeholder-text, video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+#video-placeholder-text {
+    display: flex; justify-content: center; align-items: center; 
+    font-family: 'Pinyon Script', cursive; font-size: 2.2rem; padding: 20px; box-sizing: border-box;
+}
+
+/* CONTROLES DE CONTEÚDO DINÂMICO (BOTÕES E JANELA) */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+    flex-wrap: wrap; /* Adicionado para responsividade */
+}
+
+.tab-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFB6C1;
+    border: 1px solid #FFB6C1;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    flex-grow: 1; /* Adicionado para responsividade */
+    min-width: 100px; /* Adicionado para responsividade */
+}
+
+.tab-button:hover { background-color: rgba(255, 255, 255, 0.2); }
+.tab-button.active { background-color: #FFB6C1; color: #4e0000; font-weight: bold; }
+
+.content-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 150px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    word-wrap: break-word; /* Adicionado para responsividade */
+}
+
+.tab-content { display: none; animation: fadeInContent 0.5s; }
+.tab-content.active { display: block; }
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content h3 {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+
+/* TIMELINE */
+.timeline-container { margin-top: 40px; text-align: left; border-left: 2px solid #FFB6C1; padding-left: 20px; }
+.timeline-title { font-family: 'Pinyon Script', cursive; font-size: 2rem; margin-bottom: 20px; color: #ffffff; }
+.timeline-item { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+    padding-bottom: 15px;
+    display: flex; /* Adicionado para responsividade */
+    justify-content: space-between; /* Adicionado para responsividade */
+    align-items: center; /* Adicionado para responsividade */
+}
+.timeline-item.visible { opacity: 1; transform: translateY(0); }
+.timeline-item .date { display: block; font-weight: bold; color: #FFB6C1; min-width: 140px; }
+.timeline-item .event { display: block; color: #eee; font-size: 0.9rem; flex-grow: 1; }
+
+
+/* ANIMAÇÃO DE FUNDO */
+.background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.heart { position: absolute; bottom: -10vh; width: 30px; height: 30px; background: #FFB6C1; opacity: 0.3; transform: rotate(-45deg); animation: float 10s ease-in forwards; }
+.heart::before, .heart::after { content: ""; position: absolute; width: 30px; height: 30px; background: inherit; border-radius: 50%; }
+.heart::before { top: -50%; left: 0; } .heart::after { left: 50%; top: 0; }
+@keyframes float {
+    0% { transform: translateY(0) rotate(-45deg) scale(0.5); opacity: 0.1; }
+    100% { transform: translateY(-110vh) rotate(-45deg) scale(1.5); opacity: 0.8; }
+}
+.star {
+    position: absolute; width: 4px; height: 4px; background: white; border-radius: 50%; opacity: 0.8; animation: shoot 5s linear infinite; box-shadow: 0 0 10px white;
+}
+@keyframes shoot {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translate(100vw, -100vh) rotate(45deg); opacity: 0; }
+}
+
+
+/* RESPONSIVIDADE: Media Queries para Dispositivos Móveis */
+
+@media (max-width: 768px) {
+    .container { padding: 10px; } 
+    h1.main-message { font-size: 2.5rem; }
+    .subtitle { font-size: 1rem; } 
+    .countdown-timer span { font-size: 1.8rem; }
+    .countdown-timer small { font-size: 0.7rem; }
+    #video-placeholder-text { font-size: 1.6rem; }
+
+    /* Ajuste para a linha do tempo em telas menores */
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .timeline-item .date, .timeline-item .event {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-message { font-size: 2rem; }
+    #video-placeholder-text { font-size: 1.2rem; }
+    
+    /* Força os botões de aba a ocuparem 100% da largura em telas muito estreitas */
+    .tab-buttons {
+        flex-direction: column;
+    }
+    .tab-button {
+        width: 100%;
+        min-width: unset; 
+    }
+}
