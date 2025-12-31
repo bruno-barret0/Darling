@@ -2,11 +2,9 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- Meta tag essencial para responsividade -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosso Segundo Natal Juntos ❤️</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts: Pinyon Script (para títulos) e Montserrat (para corpo) -->
     <link href="fonts.googleapis.com" rel="stylesheet">
 </head>
 <body>
@@ -15,25 +13,18 @@
     <div class="background-animation" id="background-animation"></div>
 
     <main class="container">
-        <!-- SEÇÃO DO CRONÔMETRO -->
-        <section id="countdown-section" class="section countdown-top-adjusted">
-            <p class="subtitle">Contagem regressiva para o nosso Natal juntos ❤️</p>
-            <div class="countdown-timer" id="countdown"></div>
-        </section>
-
         <!-- SEÇÃO DO VÍDEO -->
         <section id="video-section" class="section">
             <div class="video-container-wrapper">
                 <div class="video-placeholder">
-                    <p id="video-placeholder-text">Espere o momento especial ❤️</p>
-                    <video id="romantic-video" src="video presentre.mp4" loop muted playsinline style="display: none;"></video>
+                    <!-- O vídeo agora carrega visível -->
+                    <video id="romantic-video" src="video presentre.mp4" loop playsinline controls></video>
                 </div>
             </div>
         </section>
 
         <!-- CONTEÚDO ROMÂNTICO -->
-        <!-- Adicionada classe 'hidden' que será removida via JS -->
-        <section id="romantic-content" class="section hidden">
+        <section id="romantic-content" class="section">
             <h1 class="main-message" id="typing-text"></h1>
             
             <!-- Linha do tempo -->
@@ -48,13 +39,12 @@
                     <span class="event">Começamos a morar juntos</span>
                 </div>
                 <div class="timeline-item revealable">
-                    <span class="date">🎄 25/12/2024</span>
-                    <!-- Data atualizada para o próximo natal -->
+                    <span class="date">🎄 25/12/2025</span>
                     <span class="event">Nosso segundo Natal juntos!</span>
                 </div>
             </div>
 
-            <!-- CONTROLES DE CONTEÚDO DINÂMICO (5 Botões no final) -->
+            <!-- BOTÕES DE MENSAGENS -->
             <div class="tab-buttons">
                 <button class="tab-button" onclick="openTab(event, 'mensagem1')">Mensagem 1</button>
                 <button class="tab-button" onclick="openTab(event, 'mensagem2')">Mensagem 2</button>
@@ -63,7 +53,7 @@
                 <button class="tab-button" onclick="openTab(event, 'mensagem5')">Mensagem 5</button>
             </div>
 
-            <!-- ÁREA DE CONTEÚDO DINÂMICO -->
+            <!-- MENSAGENS -->
             <div id="content-container" class="content-container">
                 <div id="mensagem1" class="tab-content">
                     <h3>🎁 Escolha Eterna</h3>
@@ -86,7 +76,6 @@
                     <p>Com você, cada dia é casa, cada sorriso é abrigo e cada Natal é promessa de um para sempre.</p>
                 </div>
             </div>
-            
         </section>
     </main>
 
