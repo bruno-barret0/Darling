@@ -1,150 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Configurações Iniciais ---
-    // A data alvo é sempre o próximo Natal
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const isChristmasPassed = now.getMonth() === 11 && now.getDate() >= 25;
-    const targetYear = isChristmasPassed ? currentYear + 1 : currentYear;
+/* RESET E ESTILOS GERAIS */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background-color: #4e0000; color: #FFB6C1; font-family: 'Montserrat', sans-serif;
+    min-height: 100vh; overflow-x: hidden; position: relative; text-align: center;
+}
+.container { position: relative; z-index: 10; padding: 20px; width: 100%; max-width: 800px; margin: auto; }
+.section { margin-bottom: 40px; width: 100%; }
 
-    const countdownEl = document.getElementById('countdown');
-    const videoPlaceholderTextEl = document.getElementById('video-placeholder-text');
-    const romanticVideoEl = document.getElementById('romantic-video');
-    const romanticContentEl = document.getElementById('romantic-content');
-    const typingTextEl = document.getElementById('typing-text');
-    const backgroundAnimationEl = document.getElementById('background-animation');
-    
-    const romanticMessage = "Kerolyn, este é o nosso segundo Natal juntos... e o começo de muitos outros.";
-    let specialMomentTriggered = false;
+/* TIPOGRAFIA */
+.main-message {
+    font-family: 'Pinyon Script', cursive; font-size: 3rem; color: #ffffff;
+    margin-bottom: 30px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    min-height: 1.5em;
+}
 
-    // --- 1. Lógica do Cronômetro (Countdown) ---
-    function updateCountdown() {
-        const now = new Date();
-        const targetDate = new Date(targetYear, 11, 25, 0, 0, 1); // 25 de Dezembro, 00:00:01
-        const timeDifference = targetDate - now;
+/* VIDEO */
+.video-container-wrapper { display: flex; justify-content: center; margin-top: 30px; width: 100%; }
+.video-placeholder {
+    position: relative; width: 100%; padding-top: 56.25%;
+    background-color: #8B0000; border-radius: 8px; max-width: 700px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 
-        if (timeDifference <= 0 && !specialMomentTriggered) {
-            clearInterval(countdownInterval);
-            triggerSpecialMoment();
-            specialMomentTriggered = true;
-            return;
-        }
+/* ABAS */
+.tab-buttons { display: flex; justify-content: center; gap: 10px; margin: 30px 0; flex-wrap: wrap; }
+.tab-button {
+    background-color: rgba(255, 255, 255, 0.1); color: #FFB6C1; border: 1px solid #FFB6C1;
+    padding: 10px 15px; cursor: pointer; border-radius: 5px; transition: 0.3s;
+}
+.tab-button.active { background-color: #FFB6C1; color: #4e0000; }
+.content-container { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; min-height: 120px; }
+.tab-content { display: none; animation: fadeIn 0.5s; }
+.tab-content.active { display: block; }
 
-        if (!specialMomentTriggered) {
-            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+/* TIMELINE */
+.timeline-container { margin-top: 40px; text-align: left; border-left: 2px solid #FFB6C1; padding-left: 20px; margin-bottom: 40px; }
+.timeline-title { margin-bottom: 20px; font-size: 1.4rem; color: #fff; }
+.timeline-item { opacity: 0; transform: translateY(20px); transition: 0.8s; padding-bottom: 20px; }
+.timeline-item.visible { opacity: 1; transform: translateY(0); }
+.date { font-weight: bold; color: #fff; display: block; }
 
-            countdownEl.innerHTML = `
-                <div><span>${days.toString().padStart(2, '0')}</span><small>dias</small></div>
-                <div><span>${hours.toString().padStart(2, '0')}</span><small>horas</small></div>
-                <div><span>${minutes.toString().padStart(2, '0')}</span><small>minutos</small></div>
-                <div><span>${seconds.toString().padStart(2, '0')}</span><small>segundos</small></div>
-            `;
-        }
-    }
+/* FUNDO DE CORAÇÕES */
+.background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.heart { 
+    position: absolute; bottom: -10vh; width: 20px; height: 20px; background: #FFB6C1; 
+    opacity: 0.3; transform: rotate(-45deg); animation: float 10s linear forwards; 
+}
+.heart::before, .heart::after { content: ''; position: absolute; width: 100%; height: 100%; background: inherit; border-radius: 50%; }
+.heart::before { top: -50%; left: 0; }
+.heart::after { left: 50%; top: 0; }
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); 
+@keyframes float { 100% { transform: translateY(-110vh) rotate(-45deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    // --- 2. Acionar Momento Especial (Vídeo e Conteúdo Extra) ---
-    async function triggerSpecialMoment() {
-        document.getElementById('countdown-section').style.display = 'none';
-        videoPlaceholderTextEl.style.display = 'none';
-        romanticVideoEl.style.display = 'block'; 
-
-        try {
-            await romanticVideoEl.play(); 
-        } catch (err) { 
-            // Fallback para autoplay bloqueado (comum em móveis)
-            console.error("Autoplay foi prevenido:", err);
-            videoPlaceholderTextEl.style.display = 'flex'; 
-            videoPlaceholderTextEl.textContent = "Toque aqui para ver a mensagem ❤️";
-
-            const videoWrapper = document.querySelector('.video-placeholder');
-            const playVideoManually = () => {
-                romanticVideoEl.play();
-                videoPlaceholderTextEl.style.display = 'none';
-                videoWrapper.removeEventListener('click', playVideoManually);
-            };
-            videoWrapper.addEventListener('click', playVideoManually);
-        }
-
-        romanticContentEl.classList.remove('hidden');
-        setTimeout(() => {
-            romanticContentEl.style.opacity = '1';
-            // Rola suavemente para o novo conteúdo ficar visível em telas pequenas
-            romanticContentEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-        }, 10);
-        
-        typeMessage(romanticMessage, typingTextEl);
-        setupTimelineObserver();
-
-        setTimeout(() => {
-            const firstTabButton = document.querySelector('.tab-button');
-            if(firstTabButton) {
-                // Simula um clique no primeiro botão de aba
-                firstTabButton.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-            }
-        }, 200);
-    }
-    
-    // --- 3. Efeito de Digitação (Typing Effect) ---
-    function typeMessage(message, element) {
-        let index = 0; element.innerHTML = ''; const intervalId = setInterval(() => {
-            if (index < message.length) { element.innerHTML += message.charAt(index); index++; } 
-            else { clearInterval(intervalId); }
-        }, 80);
-    }
-
-    // --- 4. Animação da Timeline ao Scrollar ---
-    function setupTimelineObserver() {
-        const timelineItems = document.querySelectorAll('.revealable');
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.5 };
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-            });
-        }, observerOptions);
-        timelineItems.forEach(item => observer.observe(item));
-    }
-    
-    // --- 5. Funcionalidade de Abas/Guias (Tabs) ---
-    window.openTab = function(evt, tabName) {
-        const tabContents = document.getElementsByClassName("tab-content");
-        for (let i = 0; i < tabContents.length; i++) {
-            tabContents[i].classList.remove('active');
-        }
-
-        const tabButtons = document.getElementsByClassName("tab-button");
-        for (let i = 0; i < tabButtons.length; i++) {
-            tabButtons[i].classList.remove('active');
-        }
-
-        const targetTabEl = document.getElementById(tabName);
-        if (targetTabEl) targetTabEl.classList.add('active');
-        if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
-    }
-
-
-    // --- 6. Animação de Fundo (Corações e Estrelas) ---
-    function createHeart() { 
-        const heart = document.createElement('div'); heart.classList.add('heart'); heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 5 + 5 + 's'; heart.style.opacity = Math.random() * 0.5 + 0.1;
-        heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`; backgroundAnimationEl.appendChild(heart);
-        heart.addEventListener('animationend', () => heart.remove());
-    }
-    setInterval(createHeart, 300);
-
-    function createStar() {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.left = Math.random() * 80 + 'vw';
-        star.style.top = Math.random() * 40 + 60 + 'vh'; 
-        star.style.animationDuration = Math.random() * 3 + 3 + 's'; 
-        backgroundAnimationEl.appendChild(star);
-        star.addEventListener('animationend', () => star.remove());
-    }
-    setInterval(createStar, 5000);
-
-});
+@media (max-width: 768px) { .main-message { font-size: 2rem; } }
